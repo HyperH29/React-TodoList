@@ -1,5 +1,5 @@
 // Add Slice here
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 // The example we are following put this method in tot the createSlice method
 // We do we need to reference the initial state here?
@@ -41,8 +41,8 @@ export const todoSlice = createSlice({
     deleteTodo: (state, action) => {
       //  Delete the todo of the id and set completed to true
       return state.data.filter((todo) => {
-        return todo.id !== action.payload
-
+        state.nextId -= 1;
+        return todo.id !== action.payload;
       });
       //  Unsure if the code below works.
       // state.todos = state.todos.filter((todo) => todo.id !== action.payload);
@@ -56,7 +56,7 @@ export const todoSlice = createSlice({
   },
 });
 
-export const {addTodo, editTodo, deleteTodo, completeTodo} =
-    todoSlice.actions;
+export const { addTodo, editTodo, deleteTodo, completeTodo } =
+  todoSlice.actions;
 
 export default todoSlice.reducer;
