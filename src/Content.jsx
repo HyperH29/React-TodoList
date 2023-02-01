@@ -5,8 +5,8 @@ function Content(props) {
     props.completed(props.id);
   };
   return (
-    <div onClick={deleteTodo}>
-      <input type={"checkbox"}></input>
+    <div>
+      <input type={"checkbox"} onClick={deleteTodo}></input>
       <label>{props.text}</label>
     </div>
   );

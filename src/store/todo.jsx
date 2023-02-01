@@ -1,5 +1,5 @@
 // Add Slice here
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 // The example we are following put this method in tot the createSlice method
 // We do we need to reference the initial state here?
@@ -17,11 +17,10 @@ export const todoSlice = createSlice({
   initialState: initialTodoState,
   reducers: {
     addTodo: (state, action) => {
-      const newTodo = {
+      state.data[state.nextId] = {
         content: action.payload,
         completed: false,
       };
-      state.data[state.nextId] = newTodo;
       state.nextId += 1;
     },
 
@@ -34,29 +33,37 @@ export const todoSlice = createSlice({
     editTodo: (state, action) => {
       // check box is clicked and button is clicked to edit
       //  Edit the todo of the id and set completed to true
-      const index = state.data.findIndex((todo) => todo.id === action.payload);
-      index.content = action.payload;
+      state.data[state.nextId] = {
+        content: action.payload,
+        completed: false,
+      };
+      state.nextId += 1;
     },
 
     deleteTodo: (state, action) => {
       //  Delete the todo of the id and set completed to true
-      return state.data.filter((todo) => {
-        state.nextId -= 1;
-        return todo.id !== action.payload;
-      });
+      const id = action.payload;
+      const newState = {...state};
+      delete newState.data[id];
+      return newState;
+
+      // state.data = state.data.filter((todo) => todo.data !== action.payload);
       //  Unsure if the code below works.
       // state.todos = state.todos.filter((todo) => todo.id !== action.payload);
       // state.count -= 1;
     },
     // Unsure of how to complete a todo
+    // Check checkbox is true underline the todo.
     completeTodo: (state, action) => {
-      const index = state.data.findIndex((todo) => todo.id === action.payload);
+      const index = state.data.findIndex(
+          (todo) => todo.nextId === action.payload.nextId
+      );
       state.data[index].completed = true;
     },
   },
 });
 
-export const { addTodo, editTodo, deleteTodo, completeTodo } =
-  todoSlice.actions;
+export const {addTodo, editTodo, deleteTodo, completeTodo} =
+    todoSlice.actions;
 
 export default todoSlice.reducer;
