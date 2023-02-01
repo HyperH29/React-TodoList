@@ -1,0 +1,22 @@
+{
+  "name": "task51_p2",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
+    "bootstrap": "^5.2.3",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.7.0",
+    "react-dom": "^17.0.2",
+    "react-redux": "^8.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.7",
+    "vite": "^2.9.0"
+  }
+}
