@@ -12,6 +12,7 @@ const initialTodoState = {
     },
   },
 };
+
 export const todoSlice = createSlice({
   name: "todo",
   initialState: initialTodoState,
@@ -43,10 +44,8 @@ export const todoSlice = createSlice({
     deleteTodo: (state, action) => {
       //  Delete the todo of the id and set completed to true
       const id = action.payload;
-      const newState = {...state};
-      delete newState.data[id];
-      return newState;
 
+      delete state.data[id];    
       // state.data = state.data.filter((todo) => todo.data !== action.payload);
       //  Unsure if the code below works.
       // state.todos = state.todos.filter((todo) => todo.id !== action.payload);
@@ -55,10 +54,9 @@ export const todoSlice = createSlice({
     // Unsure of how to complete a todo
     // Check checkbox is true underline the todo.
     completeTodo: (state, action) => {
-      const index = state.data.findIndex(
-          (todo) => todo.nextId === action.payload.nextId
-      );
-      state.data[index].completed = true;
+      const id = action.payload;
+
+      state.data[id].completed = true;
     },
   },
 });
