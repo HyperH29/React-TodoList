@@ -45,8 +45,8 @@ function TodoList({ todos, count }) {
   };
 
   // I am targeting the id of the todo item that I want to delete.
-  const handleEdit = (todo) => {
-    dispatch(editTodo(todo));
+  const handleEdit = (index) => {
+    dispatch(editTodo(index));
   };
 
   const handleDelete = (id) => {
