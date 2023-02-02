@@ -32,12 +32,12 @@ function TodoList({ todos, count }) {
   //         completed: false,
   //     },
   // ];
-  console.log(todos);
+  //console.log(todos);
   // phrase object to string
   // With this value we can see the number of todos in the list
-  console.log(JSON.stringify(count - 1));
+  //console.log(JSON.stringify(count - 1));
 
-  const handleAddTodo = (e) => {
+  const handleAdd = (e) => {
     e.preventDefault();
     // Remove completed: false
     dispatch(addTodo(input));
@@ -45,17 +45,18 @@ function TodoList({ todos, count }) {
   };
 
   // I am targeting the id of the todo item that I want to delete.
-  const handleTodoDone = () => {
-    dispatch(deleteTodo);
+  const handleEdit = (todo) => {
+    dispatch(editTodo(todo));
   };
 
-  const handleTodoEdit = (id) => {
-    dispatch(editTodo);
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
   };
 
-  const handleTodoComplete = (id) => {
-    dispatch(completeTodo);
+  const handleComplete = (id) => { 
+
   };
+
   return (
     <div className="App">
       <h1> Todo List</h1>
@@ -73,19 +74,24 @@ function TodoList({ todos, count }) {
       </form>
       <div>
         <ul>
-          {Object.keys(todos.data).map((todo) => (
-            <div>
-              <Content
-                key={todo}
-                id={todo}
-                text={todos.data[todo].content}
-                completed={handleTodoComplete}
-              />
-              <Button onClick={handleAddTodo}>+</Button>
-              <Button onClick={handleTodoEdit}>Edit</Button>
-              <Button onClick={handleTodoDone}>Delete</Button>
-            </div>
-          ))}
+          { 
+          Object.keys(todos.data).map((index) => {
+            let todo = todos.data[index];
+
+            return (
+              <div>
+                <Content
+                  key={index}
+                  id={index}
+                  text={todo.content}
+                  completed={() => handleComplete(index)}
+                />
+                <Button onClick={handleAdd}>+</Button>
+                <Button onClick={() => handleEdit(index)}>Edit</Button>
+                <Button onClick={() => handleDelete(index)}>Delete</Button>
+              </div>
+            );
+          })}
         </ul>
       </div>
     </div>
